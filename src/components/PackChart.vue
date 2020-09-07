@@ -19,25 +19,25 @@
 </template>
 
 <script>
-import * as d3 from "d3";
-import { nest } from "d3-collection";
+import * as d3 from 'd3';
+import { nest } from 'd3-collection';
 
 export default {
-  name: "PackChart",
+  name: 'PackChart',
   props: {
-    tweetData: Object,
+    tweetData: Object
   },
   data() {
     return {
-      msg: "👋 from the Chart Component",
+      msg: '👋 from the Chart Component',
       height: 600,
-      width: 600,
+      width: 600
     };
   },
   created() {
     this.colourScale = d3
       .scaleOrdinal()
-      .range(["#5EAFC6", "#FE9922", "#93c464", "#75739F"]);
+      .range(['#5EAFC6', '#FE9922', '#93c464', '#75739F']);
   },
   methods: {
     packChart() {
@@ -53,17 +53,17 @@ export default {
           x: d.x,
           y: d.y,
           fill,
-          stroke: "grey",
+          stroke: 'grey'
         };
       });
-    },
+    }
   },
   computed: {
     packData() {
       const nestedTweets = nest()
         .key((d) => d.user)
         .entries(this.tweetData);
-      const packableTweets = { id: "All Tweets", values: nestedTweets };
+      const packableTweets = { id: 'All Tweets', values: nestedTweets };
       return d3
         .hierarchy(packableTweets, (d) => d.values)
         .sum((d) =>
@@ -72,8 +72,8 @@ export default {
     },
     output() {
       return this.packChart();
-    },
-  },
+    }
+  }
 };
 </script>
 
